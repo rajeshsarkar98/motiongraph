@@ -1,0 +1,15 @@
+.footer-link {
+  color: #6c757d;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.footer-link:hover {
+  color: #007bff;
+  font-size: 1.1rem;
+  text-decoration: underline;
+}
+
+.footer-link:focus {
+  outline: none;
+}
