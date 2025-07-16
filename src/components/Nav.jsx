@@ -1,7 +1,13 @@
-// Nav.jsx
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useEffect, useState, useRef } from "react"; // Import useRef and useState
 
 function Nav() {
+  const location = useLocation();
+  // State to manage the collapse/expansion of the main navbar
+  const [isNavCollapsed, setIsNavCollapsed] = useState(true);
+  // Ref for the navbar collapse element to check its state
+  const navbarCollapseRef = useRef(null);
+
   const portfolioItems = [
     { to: "/portfolio/prewedding", label: "Prewedding Portfolio" },
     { to: "/portfolio/wedding", label: "Wedding Portfolio" },
@@ -19,7 +25,6 @@ function Nav() {
     { to: "/booking/children", label: "Children Booking" },
   ];
 
-  // Manual list of services for the dropdown to ensure all are listed
   const serviceDropdownItems = [
     { to: "/services/cinematic-wedding-films", label: "Cinematic Wedding Films" },
     { to: "/services/premium-wedding-photography", label: "Premium Wedding Photography" },
@@ -35,7 +40,8 @@ function Nav() {
     { to: "/services/short-films-music-videos", label: "Short Films & Music Videos" },
   ];
 
-  const dropdowns = [
+  const allDropdowns = [
+    { id: "services", label: "Services", to: "/services", items: serviceDropdownItems },
     { id: "portfolio", label: "Portfolio", items: portfolioItems },
     { id: "film", label: "Film", items: filmItems },
     { id: "booking", label: "Booking", items: bookingItems },
@@ -49,23 +55,73 @@ function Nav() {
     { to: "/payment", label: "Payment" },
   ];
 
+  // Toggles the navbar collapse state
+  const handleNavToggle = () => {
+    setIsNavCollapsed(!isNavCollapsed);
+  };
+
+  // Closes the main navbar collapse
+  const closeMainNavbar = () => {
+    setIsNavCollapsed(true);
+  };
+
+  // Function to close a specific dropdown by simulating a click on its toggle
+  const closeSpecificDropdown = (event) => {
+    // Find the closest parent with 'dropdown-menu' class
+    const dropdownMenu = event.target.closest('.dropdown-menu');
+    if (dropdownMenu) {
+      // Find the parent dropdown item (li.nav-item.dropdown)
+      const dropdownParent = dropdownMenu.closest('.nav-item.dropdown');
+      if (dropdownParent) {
+        // Find the dropdown toggle button within this specific dropdown
+        const dropdownToggle = dropdownParent.querySelector('.dropdown-toggle');
+        // Only click if it's currently expanded
+        if (dropdownToggle && dropdownToggle.getAttribute('aria-expanded') === 'true') {
+          dropdownToggle.click(); // This makes Bootstrap close it
+        }
+      }
+    }
+  };
+
+  // Unified click handler for all NavLinks
+  const handleNavLinkClick = (event) => {
+    closeMainNavbar(); // Always close the main navbar
+    closeSpecificDropdown(event); // Attempt to close any open dropdown
+  };
+
+  // Optional: auto-close navbar on route change
+  // Also ensures the state matches the actual DOM state after external Bootstrap actions
+  useEffect(() => {
+    if (navbarCollapseRef.current) {
+      // Check if Bootstrap has hidden the element. If so, update React state.
+      const isHidden = !navbarCollapseRef.current.classList.contains('show');
+      if (isNavCollapsed !== isHidden) {
+        setIsNavCollapsed(isHidden);
+      }
+    }
+  }, [location, isNavCollapsed]); // Dependency on isNavCollapsed to sync state
+
   const renderDropdown = (dropdown) => (
     <li className="nav-item dropdown" key={dropdown.id}>
-      <a
-        className="nav-link dropdown-toggle"
-        href="#"
+      <NavLink
+        to={dropdown.to || "#"}
+        className={({ isActive }) => `nav-link ${isActive ? "active" : ""} dropdown-toggle`}
         role="button"
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
         {dropdown.label}
-      </a>
+      </NavLink>
       <ul className="dropdown-menu">
         {dropdown.items.map((item, idx) => (
           <li key={idx}>
-            <Link className="dropdown-item" to={item.to}>
+            <NavLink
+              className={({ isActive }) => `dropdown-item ${isActive ? "active" : ""}`}
+              to={item.to}
+              onClick={handleNavLinkClick} // Use the unified handler
+            >
               {item.label}
-            </Link>
+            </NavLink>
           </li>
         ))}
       </ul>
@@ -78,6 +134,7 @@ function Nav() {
         to={link.to}
         className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
         aria-current={({ isActive }) => (isActive ? "page" : undefined)}
+        onClick={handleNavLinkClick} // Use the unified handler
       >
         {link.label}
       </NavLink>
@@ -87,7 +144,7 @@ function Nav() {
   return (
     <nav className="navbar navbar-expand-lg bg-white fixed-top shadow-sm">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand fw-bold fs-4">
+        <Link to="/" className="navbar-brand fw-bold fs-4" onClick={handleNavLinkClick}>
           MOTION GRAPH
         </Link>
         <button
@@ -96,40 +153,21 @@ function Nav() {
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
           aria-controls="navbarNav"
-          aria-expanded="false"
+          // We use our own state for aria-expanded, toggled by Bootstrap's JS
+          aria-expanded={!isNavCollapsed}
           aria-label="Toggle navigation"
+          onClick={handleNavToggle} // Toggle our React state when the button is clicked
         >
-          <span className="navbar-toggler-icon"></span>
+          <i className="fa-solid fa-bars"></i>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
+        <div
+          className={`collapse navbar-collapse ${!isNavCollapsed ? 'show' : ''}`}
+          id="navbarNav"
+          ref={navbarCollapseRef} // Attach ref here
+        >
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             {navLinks.map(renderNavLink)}
-
-            {/* Special handling for Services: main link + dropdown */}
-            <li className="nav-item dropdown">
-              <NavLink
-                to="/services" // Main link to services overview page
-                className={({ isActive }) => `nav-link ${isActive ? "active" : ""} dropdown-toggle`}
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                aria-current={({ isActive }) => (isActive ? "page" : undefined)}
-              >
-                Services
-              </NavLink>
-              <ul className="dropdown-menu">
-                {serviceDropdownItems.map((item, idx) => (
-                  <li key={idx}>
-                    <Link className="dropdown-item" to={item.to}>
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </li>
-
-            {/* Render other dropdowns */}
-            {dropdowns.map(renderDropdown)}
+            {allDropdowns.map(renderDropdown)}
           </ul>
         </div>
       </div>
