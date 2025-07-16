@@ -1,0 +1,211 @@
+/* Payment.css (Existing styles + New Modal styles) */
+
+.payment-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a1a1a; /* Dark background */
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; /* Added for consistency */
+}
+
+.payment-card {
+  background-color: #0d0d0d; /* Even darker card background */
+  color: #f0f0f0; /* Light text for contrast */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #333; /* Subtle border */
+}
+
+.payment-heading {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #ff4c60; /* Highlight color */
+}
+
+.payment-description {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  color: #ccc;
+}
+
+.payment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #f0f0f0;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #2a2a2a; /* Darker input background */
+  color: #f0f0f0;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group input[type="email"]::placeholder,
+.form-group input[type="number"]::placeholder {
+  color: #888;
+}
+
+.payment-button {
+  background-color: #ff4c60; /* Match highlight color */
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 100%;
+}
+
+.payment-button:hover {
+  background-color: #e63946; /* Slightly darker on hover */
+  transform: translateY(-2px);
+}
+
+.payment-note {
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.payment-link {
+  color: #ff4c60;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.payment-link:hover {
+  color: #e63946;
+  text-decoration: underline;
+}
+
+/* --- New Modal Styles --- */
+.payment-modal-content {
+  background-color: #0d0d0d; /* Dark background for modal content */
+  color: #f0f0f0;
+  border: 1px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.7);
+}
+
+.payment-modal-header {
+  border-bottom: 1px solid #333;
+  color: #ff4c60; /* Highlight color for title */
+}
+
+.payment-modal-body {
+  padding: 2rem;
+}
+
+.payment-qr-code {
+  max-width: 250px; /* Limit QR code size */
+  height: auto;
+  margin: 0 auto; /* Center the QR code */
+  display: block; /* Ensure it's a block element for centering */
+}
+
+.payment-modal-footer {
+  border-top: 1px solid #333;
+}
+
+/* Ensure the close button is visible on dark background */
+.btn-close-white {
+  filter: invert(1) grayscale(100%) brightness(200%); /* Makes the default close icon white */
+}
+
+/* Modal animation (fade in) */
+.modal.fade.show {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsiveness for Payment.css */
+@media (max-width: 768px) {
+  .payment-card {
+    padding: 30px 20px;
+  }
+
+  .payment-heading {
+    font-size: 2rem;
+  }
+
+  .payment-description {
+    font-size: 1rem;
+  }
+
+  .payment-button {
+    font-size: 1.1rem;
+    padding: 12px 20px;
+  }
+
+  .payment-modal-body {
+    padding: 1.5rem; /* Adjust padding for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-card {
+    padding: 20px 15px;
+    margin: 10px;
+  }
+
+  .payment-heading {
+    font-size: 1.8rem;
+  }
+
+  .payment-description {
+    font-size: 0.9rem;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+  }
+
+  .form-group input {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .payment-button {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+
+  .payment-qr-code {
+    max-width: 200px; /* Smaller QR code on very small screens */
+  }
+}

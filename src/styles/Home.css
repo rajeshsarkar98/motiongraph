@@ -1,43 +1,140 @@
+/* Home.css */
 
-
-
-.home-hero {
+/* General Page Styling */
+.home-page {
   width: 100%;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Prevent horizontal scroll due to animations */
+  font-family: 'Poppins', sans-serif; /* Ensure consistent font */
 }
 
-.block-1 {
+/* Hero Section (block-1) */
+.home-hero__block.block-1 {
   background-image: url("https://images.pexels.com/photos/27155553/pexels-photo-27155553.jpeg");
   background-size: cover;
   background-position: center top;
   height: 100vh;
   position: relative;
+  overflow: hidden; /* Hide elements outside during animation */
+  display: flex; /* Ensure flex for centering */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Horizontally center content */
 }
 
-/* Scrollable Album Styles */
+.hero-content {
+  opacity: 0; /* Initial state for animation */
+  animation: fadeInUp 1s ease-out forwards;
+  animation-delay: 0.5s; /* Apply delay to the whole block */
+}
+
+.hero-content h1,
+.hero-content h2,
+.hero-content p,
+.hero-content .btn {
+  opacity: 0; /* Initial state for individual elements */
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.hero-content h1 { animation-delay: 0.8s; }
+.hero-content h2 { animation-delay: 1s; }
+.hero-content p { animation-delay: 1.2s; }
+.hero-content .btn:first-child { animation-delay: 1.4s; }
+.hero-content .btn:last-child { animation-delay: 1.5s; }
+
+
+.social-links a {
+  opacity: 0; /* Initial state for social icons */
+  animation: fadeInLeft 0.8s ease-out forwards;
+}
+.social-links a:nth-child(1) { animation-delay: 1.8s; }
+.social-links a:nth-child(2) { animation-delay: 2s; }
+.social-links a:nth-child(3) { animation-delay: 2.2s; }
+
+
+/* About Section (New Integration) */
+.home-about-section {
+  background-color: #1a1a1a; /* Dark background */
+  color: #f8f9fa; /* Light text */
+}
+
+.home-about-section h1,
+.home-about-section h2 {
+  color: #ff4c60; /* Highlight color for headings */
+}
+
+.home-about-section .row > div {
+  opacity: 0; /* Initial state for animation */
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.home-about-section .row > div:first-child { /* Text section */
+  animation-delay: 0.3s;
+}
+.home-about-section .row > div:last-child { /* Image section */
+  animation-delay: 0.5s;
+}
+
+.about-image-wrapper {
+  transform: scale(0.95); /* Slightly scale down for initial state */
+  transition: transform 0.3s ease-out;
+}
+
+.about-image-wrapper:hover {
+  transform: scale(1);
+}
+
+/* Brand Introduction Section (block-2) */
+.home-hero__block.block-2 {
+  background-color: #f8f9fa; /* Light background */
+  color: #343a40;
+}
+
+.home-hero__block.block-2 h2,
+.home-hero__block.block-2 p {
+  opacity: 0; /* Initial state for animation */
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.home-hero__block.block-2 h2 { animation-delay: 0.2s; }
+.home-hero__block.block-2 p { animation-delay: 0.4s; }
+
+
+/* Album Section (inside block-2, but now has its own dark background) */
 .album-scroll-container {
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
-  gap: 1rem;
-  padding-bottom: 1rem;
-  height: 80vh;
+  gap: 1.5rem; /* Increased gap */
+  padding: 2rem 1.5rem; /* More generous padding */
+  height: 80vh; /* Consistent height */
   overflow-x: auto;
   display: flex;
   scrollbar-width: none; /* Firefox */
+  background-color: #0d0d0d; /* Dark background for album section */
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.5); /* Inner shadow */
 }
 
 .album-scroll-container::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Edge */
 }
 
-.album-scroll-container > .card {
-  scroll-snap-align: start;
-  transition: transform 0.3s ease;
+.album-card { /* Renamed from .card for specificity */
+  min-width: 650px; /* Slightly larger default */
+  max-width: 90%;
+  border-radius: 0.75rem; /* Rounded corners */
+  overflow: hidden; /* Ensure image corners match card */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   flex-shrink: 0;
+  opacity: 0; /* Initial state for animation */
+  animation: scaleInAndFadeIn 0.8s ease-out forwards;
 }
 
-.album-scroll-container > .card:hover {
-  transform: scale(1.03);
+.album-card img {
+  height: 75%; /* Adjust image height within card */
+  object-fit: cover;
+}
+
+.album-card:hover {
+  transform: scale(1.03) translateY(-5px); /* Lift and grow slightly */
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4); /* Stronger shadow on hover */
 }
 
 /* Navigation Buttons */
@@ -45,20 +142,259 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 10;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  opacity: 0.9;
-  background-color: #fff;
+  background-color: rgba(255, 76, 96, 0.7); /* Use highlight color with opacity */
+  color: white;
   border: none;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  padding: 15px 20px; /* Larger buttons */
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%; /* Make them round */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  opacity: 0; /* Initial state for animation */
+  animation: fadeIn 0.8s ease-out forwards;
+  animation-delay: 1s;
 }
 
-.album-nav-prev {
-  left: 15px;
+.album-nav-btn:hover {
+  background-color: #ff4c60; /* Solid highlight color on hover */
+  transform: translateY(-50%) scale(1.1);
 }
 
-.album-nav-next {
-  right: 15px;
+.album-nav-btn.album-nav-prev { /* Use specific classes */
+  left: 2%;
+}
+
+.album-nav-btn.album-nav-next { /* Use specific classes */
+  right: 2%;
+}
+
+/* Contact Section on Home Page */
+.home-hero__block.block-3 {
+  background-color: #1a1a1a; /* Dark background */
+  color: #f8f9fa; /* Light text */
+  padding-top: 5rem; /* More padding */
+  padding-bottom: 5rem;
+}
+
+.home-hero__block.block-3 h2 {
+  color: #ff4c60; /* Match highlight color */
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+}
+.home-hero__block.block-3 p,
+.home-hero__block.block-3 .btn {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+.home-hero__block.block-3 p { animation-delay: 0.4s; }
+.home-hero__block.block-3 .btn { animation-delay: 0.6s; }
+
+
+/* --- Keyframe Animations --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px); /* Starts from left */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px); /* Starts from right */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleInAndFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- Responsiveness --- */
+@media (max-width: 1200px) {
+  .album-card {
+    min-width: 550px; /* Adjust card width for larger tablets */
+  }
+}
+
+@media (max-width: 992px) {
+  .block-1 {
+    height: 80vh; /* Adjust height for tablets */
+  }
+  .hero-content h1 { font-size: 2.8rem; }
+  .hero-content h2 { font-size: 1.1rem; }
+  .hero-content p { font-size: 1.2rem; }
+
+  .social-links {
+    margin: 1.5rem !important; /* Adjust margin for social links */
+  }
+
+  .album-scroll-container {
+    height: 65vh; /* Adjust height */
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+  .album-card {
+    min-width: 450px; /* Adjust card width for tablets */
+  }
+
+  .album-nav-btn {
+    padding: 12px 16px;
+    font-size: 1.1rem;
+  }
+
+  .home-about-section .display-4 {
+    font-size: 2.8rem;
+  }
+  .home-about-section .fs-4 {
+    font-size: 1.1rem !important;
+  }
+  .home-about-section .btn {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .block-1 {
+    height: 70vh;
+    background-position: 25% top;
+  }
+  .hero-content h1 { font-size: 2.2rem; }
+  .hero-content h2 { font-size: 1rem; }
+  .hero-content p { font-size: 1rem; }
+  .hero-content .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+  }
+
+  .social-links {
+    margin: 1rem !important;
+  }
+  .social-links svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  .home-about-section .display-4 {
+    font-size: 2.2rem;
+  }
+  .home-about-section .fs-4 {
+    font-size: 1rem !important;
+  }
+  .home-about-section .btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .album-scroll-container {
+    height: 55vh;
+    padding: 1rem 0.8rem;
+    gap: 0.8rem;
+  }
+  .album-card {
+    min-width: 300px; /* Adjust card width for mobile */
+    min-height: 400px; /* Ensure a minimum height */
+  }
+  .album-card img {
+    height: 70%;
+  }
+
+  .album-nav-btn {
+    padding: 10px 14px;
+    font-size: 1rem;
+  }
+  /* Hide album nav buttons on small screens if they obstruct */
+  .d-md-block .album-nav-btn {
+      display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .block-1 {
+    height: 60vh;
+    background-position: 30% top;
+  }
+  .hero-content h1 { font-size: 1.8rem; }
+  .hero-content h2 { font-size: 0.9rem; }
+  .hero-content p { font-size: 0.9rem; }
+  .hero-content .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .home-about-section .display-4 {
+    font-size: 1.8rem;
+  }
+  .home-about-section .fs-4 {
+    font-size: 0.9rem !important;
+  }
+  .home-about-section .btn {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .album-scroll-container {
+    height: 45vh;
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  .album-card {
+    min-width: 250px;
+    min-height: 350px;
+    max-width: 95%;
+  }
+  .album-card img {
+    height: 65%;
+  }
+
+  .home-hero__block.block-3 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  .home-hero__block.block-3 h2 {
+    font-size: 1.8rem;
+  }
+  .home-hero__block.block-3 p {
+    font-size: 0.85rem;
+  }
+  .home-hero__block.block-3 .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
 }

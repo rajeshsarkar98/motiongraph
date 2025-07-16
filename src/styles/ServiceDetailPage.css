@@ -1,0 +1,175 @@
+/* Services.css */
+
+/* Animations */
+/* Import Animate.css for pre-built animations */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css');
+
+.carousel-caption h1 {
+  animation-duration: 1s;
+}
+
+.carousel-caption p:nth-of-type(1) {
+  animation-duration: 1s;
+}
+
+.carousel-caption .btn {
+  animation-duration: 1.2s;
+}
+
+/* Featurette animations */
+.featurette {
+  animation-duration: 1s;
+  animation-fill-mode: both; /* Keep the end state of the animation */
+}
+
+.featurette-divider {
+  animation-duration: 1.5s;
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+}
+
+/* Customer review card animation */
+.customer-review-card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f8f9fa; /* Light background for the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.customer-review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Base styles */
+.rounded-circle {
+  object-fit: cover;
+  width: 140px; /* Default size for customer review images */
+  height: 140px;
+  border: 4px solid #007bff; /* Add a border to the circular images */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Ensure carousel images cover the area */
+.carousel-item img {
+  object-fit: cover;
+  width: 100%;
+  height: 600px; /* Set a default height for carousel images */
+}
+
+/* Featurette image styling */
+.featurette img {
+  object-fit: cover;
+  width: 100%;
+  height: 300px; /* Ensure consistent height for featurette images */
+}
+
+
+/* Responsiveness for Services.css */
+@media (max-width: 1200px) {
+  .carousel-item img {
+    height: 500px;
+  }
+  .featurette img {
+    height: 250px;
+  }
+}
+
+@media (max-width: 992px) {
+  .carousel-item h1 {
+    font-size: 2.5rem;
+  }
+  .carousel-item p {
+    font-size: 1.1rem;
+  }
+  .rounded-circle {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  .featurette-heading {
+    font-size: 2rem;
+  }
+  .featurette p {
+    font-size: 1rem;
+  }
+  .carousel-item img {
+    height: 450px;
+  }
+  .featurette img {
+    height: 220px;
+  }
+  /* Reverse order on small screens for featurettes */
+  .featurette.flex-md-row-reverse {
+    flex-direction: column-reverse;
+  }
+  .featurette:not(.flex-md-row-reverse) {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel-item h1 {
+    font-size: 2rem;
+  }
+  .carousel-item p {
+    font-size: 1rem;
+  }
+  .rounded-circle {
+    width: 100px !important;
+    height: 100px !important;
+  }
+  .featurette-heading {
+    font-size: 1.8rem;
+  }
+  .featurette p {
+    font-size: 0.9rem;
+  }
+  .col-sm-10.col-md-6.col-lg-6.text-center.mb-5 {
+    margin-bottom: 30px !important; /* Adjust spacing */
+  }
+  .carousel-item img {
+    height: 400px;
+  }
+  .featurette img {
+    height: 200px;
+  }
+  .col-md-7, .col-md-5 {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .row.featurette.align-items-center {
+    text-align: center; /* Center text for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-item h1 {
+    font-size: 1.5rem;
+  }
+  .carousel-item p {
+    font-size: 0.9rem;
+  }
+  .rounded-circle {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  .featurette-heading {
+    font-size: 1.5rem;
+  }
+  .featurette p {
+    font-size: 0.85rem;
+  }
+  .carousel-caption {
+    padding-bottom: 10px; /* Adjust padding for smaller screens */
+  }
+  .carousel-caption h1, .carousel-caption p, .carousel-caption .btn {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow for readability */
+  }
+  .carousel-item img {
+    height: 300px;
+  }
+  .featurette img {
+    height: 180px;
+  }
+}

@@ -1,8 +1,9 @@
-*{
+/* App.css */
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Poppins, sans-serif';
+  font-family:'Poppins', sans-serif ;
 }
 
 body, html, .app-container {
@@ -10,17 +11,32 @@ body, html, .app-container {
   padding: 0;
   width: 100%;
   height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll on small devices */
 }
 
-.mainDiv{
+.mainDiv {
     background-image: url(https://images.pexels.com/photos/936554/pexels-photo-936554.jpeg?_gl=1*cwmz4f*_ga*MjM5Njc1ODgyLjE3NDkyMTY1MTQ.*_ga_8JE65Q40S6*czE3NTA3MDkyNDYkbzE3JGcxJHQxNzUwNzA5NjczJGo1MSRsMCRoMA..);
     background-position: center;
-     background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat; /* Ensure background doesn't repeat */
 }
-.secondDiv{
-    font-family: sans-serif;
+.secondDiv {
+    font-family: cursive;
 }
 
 .app-container {
   transition: opacity 0.5s ease-in-out;
+}
+
+/* General Responsiveness for App.css */
+@media (max-width: 768px) {
+  body, html, .app-container {
+    font-size: 14px; /* Adjust base font size for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  body, html, .app-container {
+    font-size: 12px;
+  }
 }

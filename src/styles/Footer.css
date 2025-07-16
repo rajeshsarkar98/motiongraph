@@ -1,15 +1,53 @@
+/* styles/Footer.css */
+
+.footer-section {
+  font-family: 'Poppins', sans-serif; /* Keep consistent font */
+}
+
+.footer-section .container {
+  max-width: 1200px; /* Limit container width for large screens */
+}
+
+.footer-title {
+  font-size: 1.3rem; /* Slightly larger heading for sections */
+  color: #fff; /* Pure white for titles */
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
 .footer-link {
-  color: #6c757d;
-  transition: all 0.3s ease;
-  font-size: 1rem;
+  transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+  display: inline-block; /* Needed for transform on text links */
 }
 
 .footer-link:hover {
-  color: #007bff;
-  font-size: 1.1rem;
-  text-decoration: underline;
+  color: var(--bs-primary) !important; /* Use Bootstrap primary color on hover */
+  transform: translateX(5px); /* Slide effect on hover */
+  text-decoration: underline !important;
 }
 
-.footer-link:focus {
-  outline: none;
+.list-unstyled li {
+  margin-bottom: 0.5rem; /* Space between list items */
+}
+
+.footer-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Lighter divider line */
+}
+
+/* Social Icons */
+.social-icons .footer-social-icon {
+  font-size: 1.4rem; /* Larger social icons */
+  transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.social-icons .footer-social-icon:hover {
+  color: var(--bs-primary) !important; /* Primary color on hover */
+  transform: translateY(-3px) scale(1.1); /* Slight lift and scale */
+}
+
+/* Responsive adjustments for text alignment */
+@media (max-width: 767.98px) {
+  .footer-section .row > div {
+    text-align: center !important; /* Force center alignment for columns on small screens */
+  }
 }

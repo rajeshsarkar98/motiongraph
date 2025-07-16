@@ -1,51 +1,65 @@
-.testimonial-section {
-  padding: 4rem 2rem;
-  background-color: #fff;
-  color: #222;
-  font-family: "Segoe UI", sans-serif;
-  display: flex;
-  justify-content: center;
+/* src/styles/Testimonials.css */
+
+.testimonials-section {
+  font-family: 'Poppins', sans-serif; /* Consistent font with other components */
+  color: #343a40; /* Darker text for readability */
+  margin-top: 3rem;
 }
 
-.testimonial-container {
-  max-width: 800px;
-  width: 100%;
-  text-align: center;
+.testimonials-section h2 {
+  font-weight: 700; /* Bolder heading */
+  color: #212529; /* Darker color for heading */
 }
 
-.testimonial-heading {
-  font-size: 2.5rem;
-  color: #ff4c60;
-  margin-bottom: 2rem;
-}
-
+/* Testimonial Card Styling */
 .testimonial-card {
-  background-color: #f9f9f9;
-  padding: 2rem 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+  border-radius: 0.75rem; /* Rounded corners for cards */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth hover effects */
+  background-color: #fff; /* White background for cards */
+
+  /* Initial state for entry animation */
+  opacity: 0;
+  animation: fadeInSlideUp 0.7s ease-out forwards; /* Apply the entry animation */
 }
 
-.testimonial-text {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  font-style: italic;
-  margin-bottom: 1.5rem;
+.testimonial-card:hover {
+  transform: translateY(-10px); /* Lifts the card slightly on hover */
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important; /* Stronger shadow on hover */
 }
 
-.testimonial-author {
-  font-weight: bold;
-  color: #444;
-  font-size: 1rem;
+.testimonial-quote {
+  font-size: 1.05rem; /* Slightly larger quote text */
+  line-height: 1.6; /* Better line spacing for readability */
+  font-style: italic; /* Italicize the quote */
+  color: #5a6268; /* Slightly muted text for the quote */
+  margin-bottom: 1.5rem; /* Space below quote */
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .testimonial-heading {
-    font-size: 2rem;
+.testimonial-avatar {
+  width: 60px; /* Larger avatar size */
+  height: 60px;
+  object-fit: cover; /* Ensures image covers the area without distortion */
+  border: 3px solid var(--bs-primary); /* A primary color border around the avatar */
+}
+
+/* Basic CSS Entry Animation */
+@keyframes fadeInSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px); /* Start slightly below */
   }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* End at original position */
+  }
+}
 
-  .testimonial-text {
-    font-size: 1rem;
+/* Responsive Adjustments */
+@media (max-width: 767.98px) {
+  .testimonials-section .display-4 {
+    font-size: 2.5rem; /* Adjust heading size for small screens */
+  }
+  .testimonial-card {
+    margin-bottom: 1rem; /* Add some space between cards when stacked on small screens */
   }
 }
